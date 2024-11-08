@@ -1,1 +1,50 @@
+# Testing apim policy deployment 1.8!
+name: apim policy test
 
+
+# permissions are required
+permissions:
+  contents: read
+  id-token: write # Require write permission to Fetch an OIDC token.
+
+# Controls when the workflow will run
+on:
+  # Triggers the workflow on push or pull request events but only for the "release" branch
+  push:
+    branches: [ "main" ]
+
+  
+jobs:
+  caller-apim-policy-deploy:
+    uses: missAnkita/Reusable-Workflows/.github/workflows/apim-reusable-workflow.yml@feature/test-multilingual
+    with: 
+        #deploy-runner-type: "ubuntu-latest"
+        azure-resource-group: 'testRG'
+        apim-resource-name: 'testapim'
+        #api-path: 'policy-test-api'
+        #api-id: 'policy-test-api'
+
+        #Policy scope to apply, 'api-level' or 'operation-level'
+        policy-scope: 'product-level'
+        
+        #To apply general base policy for the API uncomment below:
+        #tested and running successfully
+        #policy-source-file: './policies/base-policy.xml'
+
+        #To apply allowed origin policy for the API uncomment below:
+        #tested and running successfully
+        #policy-source-file: './policies/allowed-origin-policy.xml'
+
+        #To apply subscription key policy for the API uncomment below:
+        #tested and running successfully
+        policy-source-file: './policies/product-policy.xml'
+        product-id: 'starter'
+        
+        #To apply Operation Specific Policy for the API uncomment below:
+        #policy-source-file: './policies/subscription-key-policy.xml'
+        #operation-id: 'allowed-origin-operation'
+      
+    secrets:
+        client-id: ${{ secrets.CLIENT_ID}}
+        tenant-id: ${{ secrets.TENANT_ID}}
+        subscription-id: ${{ secrets.SUBSCRIPTION_ID}}

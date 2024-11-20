@@ -1,5 +1,5 @@
 # Testing apim policy deployment 1.8!
-name: apim policy test
+name: Linting test
 
 
 # permissions are required
@@ -15,7 +15,7 @@ on:
 
   
 jobs:
-  caller-apim-policy-deploy:
+  caller-linter:
     uses: missAnkita/Reusable-Workflows/.github/workflows/super-linter-resuable-wf.yml@feature/test-sprinter
     with: 
       #note jscpd & checkov is ignored by filter_regex envs

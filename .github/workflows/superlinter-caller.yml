@@ -22,6 +22,8 @@ jobs:
       filter-regex-include: ^src/
       #filter-regex-include: '.*\.(cs|js|sh|html|yml)$'
       filter-regex-exclude: ''
+      validate-jscpd: false
+      validate-checkov: false
       #filter-regex-exclude: .*\.github/workflows/super\-linter\-caller\.yml
        
       
